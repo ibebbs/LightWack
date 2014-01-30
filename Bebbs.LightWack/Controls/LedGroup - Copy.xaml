@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="Bebbs.LightWack.Controls.LedGroup"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:xaml="clr-namespace:Bebbs.LightWack.Xaml"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <xaml:RotationEnumToRotationTransformConverter x:Key="RotationEnumToRotationTransformConverter"/>
+    </UserControl.Resources>
+    <Grid>
+    	<Grid.RowDefinitions>
+    		<RowDefinition Height="Auto"/>
+    		<RowDefinition Height="Auto"/>
+    		<RowDefinition/>
+    	</Grid.RowDefinitions>
+    	<Grid.ColumnDefinitions>
+    		<ColumnDefinition Width="Auto"/>
+    		<ColumnDefinition/>
+    	</Grid.ColumnDefinitions>
+            
+    	<Grid Margin="0,0,10,0">
+    		<Ellipse Fill="White" Width="25" Height="25"/>            
+    		<TextBlock Text="{Binding Group, FallbackValue=1}" Margin="5" FontFamily="Segoe UI Black" FontSize="13.333" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    	</Grid>
+        <Button Content="@" Grid.Row="1" Margin="0,5,10,5" Command="{Binding RotateCommand}"/>
+            
+    	<Grid Grid.Column="1" Grid.RowSpan="3">
+    		<Grid.LayoutTransform>
+    			<TransformGroup>
+    				<ScaleTransform CenterX="0.5" CenterY="0.5"/>
+    				<SkewTransform CenterX="0.5" CenterY="0.5"/>
+    				<RotateTransform Angle="{Binding Rotation, Converter={StaticResource RotationEnumToRotationTransformConverter}}" CenterX="0.5" CenterY="0.5"/>
+    				<TranslateTransform/>
+    			</TransformGroup>
+    		</Grid.LayoutTransform>
+    		<Viewbox Width="25">
+    			<Canvas Width="61.3367" Height="474.253">
+    				<Rectangle Width="55.3422" Height="361.115" Canvas.Left="2.99722" Canvas.Top="0.115751" Stretch="Fill" StrokeThickness="0.0771535" StrokeMiterLimit="2.75" Stroke="#FF9F7611" Fill="#FFF0AA00"/>
+    				<Path Width="61.1879" Height="119.661" Canvas.Left="0.0743855" Canvas.Top="354.518" Stretch="Fill" StrokeThickness="0.0495987" StrokeMiterLimit="2.75" Stroke="#FF000000" Fill="#FF000000" Data="F1 M 36.5062,474.154C 36.5062,474.154 35.9401,426.438 36.7185,410.259C 39.9382,406.028 51.3662,401.05 51.3662,401.05C 61.0252,397.886 61.2375,354.543 61.2375,354.543L 0.0991849,354.543C 0.0991849,354.543 0.311481,397.886 9.97048,401.05C 9.97048,401.05 21.3985,406.028 24.6182,410.259C 25.3966,426.438 24.8305,474.154 24.8305,474.154L 36.5062,474.154 Z "/>
+    			</Canvas>
+    		</Viewbox>
+            
+    	</Grid>
+            
+    </Grid>
+</UserControl>

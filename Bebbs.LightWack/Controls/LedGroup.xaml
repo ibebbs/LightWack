@@ -1,0 +1,35 @@
+﻿<UserControl x:Name="userControl" x:Class="Bebbs.LightWack.Controls.LedGroup"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:controls="clr-namespace:Bebbs.LightWack.Controls"
+             xmlns:xaml="clr-namespace:Bebbs.LightWack.Xaml"
+             xmlns:viewModels="clr-namespace:Bebbs.LightWack.ViewModels"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <xaml:RotationEnumToRotationTransformConverter x:Key="RotationEnumToRotationTransformConverter"/>
+        <xaml:CmToPixelConverter x:Key="CmToPixelConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.LayoutTransform>
+            <TransformGroup>
+                <ScaleTransform CenterX="0.5" CenterY="0.5"/>
+                <SkewTransform CenterX="0.5" CenterY="0.5"/>
+                <RotateTransform Angle="{Binding Rotation, Converter={StaticResource RotationEnumToRotationTransformConverter}}" CenterX="0.5" CenterY="0.5"/>
+                <TranslateTransform/>
+            </TransformGroup>
+        </Grid.LayoutTransform>
+        <Viewbox Width="{Binding Source={x:Static viewModels:LedGroupViewModel.LedGroupBredth}, Converter={StaticResource CmToPixelConverter}}" Height="{Binding Source={x:Static viewModels:LedGroupViewModel.LedGroupLength}, Converter={StaticResource CmToPixelConverter}}" Stretch="Fill">
+            <Canvas Width="47.099" Height="365.006">
+        		<Rectangle Width="42.6387" Height="277.901" Canvas.Left="2.23008" Canvas.Top="0.230713" Stretch="Fill" StrokeMiterLimit="2.75" Stroke="{Binding BorderBrush, ElementName=userControl}" Fill="{Binding Foreground, ElementName=userControl}"/>
+        		<Path Width="47.0247" Height="92.0419" Canvas.Left="0.0370768" Canvas.Top="272.927" Stretch="Fill" StrokeMiterLimit="2.75" Stroke="{Binding BorderBrush, ElementName=userControl}" Fill="{Binding BorderBrush, ElementName=userControl}" Data="F1 M 28.0373,364.957C 28.0373,364.957 27.6021,328.249 28.2005,315.803C 30.6756,312.548 39.4609,308.718 39.4609,308.718C 46.8862,306.284 47.0494,272.94 47.0494,272.94L 0.0494364,272.94C 0.0494364,272.94 0.212665,306.284 7.63801,308.718C 7.63801,308.718 16.4233,312.548 18.8984,315.803C 19.4968,328.249 19.0616,364.957 19.0616,364.957L 28.0373,364.957 Z "/>
+        		<Grid Width="30" Height="30" Canvas.Left="9.099" Canvas.Top="276.132">
+        			<Ellipse Fill="{Binding Background, ElementName=userControl}"/>
+        			<TextBlock TextWrapping="Wrap" Text="{Binding Group, FallbackValue=1}" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI Black" FontSize="16" Foreground="{Binding Foreground, ElementName=userControl}"/>
+        		</Grid>
+        	</Canvas>
+        </Viewbox>
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,172 @@
+﻿<Window x:Class="Bebbs.LightWack.Views.ShellView" x:Name="View"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:local="clr-namespace:Bebbs.LightWack"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" 
+        xmlns:Controls="clr-namespace:Bebbs.LightWack.Controls" 
+        xmlns:Behaviors="clr-namespace:Bebbs.LightWack.Behaviors"
+        xmlns:xaml="clr-namespace:Bebbs.LightWack.Xaml"
+        mc:Ignorable="d"
+        Background="{DynamicResource DarkBackgroundBrush}" d:DesignHeight="715">
+    <Window.Resources>
+    	<ResourceDictionary>
+    		<ResourceDictionary.MergedDictionaries>
+    			<ResourceDictionary Source="/Bebbs.LightWack;component/XamlResources.xaml"/>
+    		</ResourceDictionary.MergedDictionaries>
+    		<DataTemplate x:Key="LedTemplate">
+    			<Grid Margin="10" Width="20" Height="20" Background="Red"/>
+    		</DataTemplate>
+    		<ItemsPanelTemplate x:Key="DisabledLedGroupsItemsPanel">
+    			<StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+    		</ItemsPanelTemplate>
+            <xaml:CmToPixelConverter x:Key="CmToPxConverter"/>
+        </ResourceDictionary>
+    </Window.Resources>
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="0.2*"/>
+			<ColumnDefinition Width="0.8*"/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="0.7*"/>
+			<RowDefinition Height="0.3*"/>
+		</Grid.RowDefinitions>
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition/>
+			</Grid.RowDefinitions>
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="10"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+				<Rectangle Fill="{DynamicResource SectionHeaderBackgroundBrush}"/>
+				<TextBlock Text="View" FontFamily="Segoe UI Semibold" FontSize="16" Foreground="{DynamicResource HeaderCaptionBrush}" Margin="5,2,0,2"/>
+				<TextBlock Text="Width (cm):" Grid.Row="2" FontFamily="Segoe UI Semilight" Foreground="{DynamicResource HeaderCaptionBrush}" FontSize="10.667" Margin="5,2,0,2"/>
+				<TextBox Grid.Row="3" Margin="5,2,10,5" Text="{Binding ViewWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+				<TextBlock Text="Height (cm):" Grid.Row="4" FontFamily="Segoe UI Semilight" Foreground="{DynamicResource HeaderCaptionBrush}" FontSize="10.667" Margin="5,2,0,2"/>
+				<TextBox Grid.Row="5" Margin="5,2,10,5" Text="{Binding ViewHeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+				<TextBlock Text="Zoom:" Grid.Row="6" FontFamily="Segoe UI Semilight" Foreground="{DynamicResource HeaderCaptionBrush}" FontSize="10.667" Margin="5,2,0,2"/>
+				<Slider Grid.Row="7" Margin="5,2,10,5" Minimum="0.01" TickFrequency="0.1" Value="{Binding ViewZoom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+			</Grid>
+			<Grid Grid.Row="1">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="10"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition/>
+				</Grid.RowDefinitions>
+				<Rectangle Fill="{DynamicResource SectionHeaderBackgroundBrush}"/>
+				<TextBlock Text="Monitor" FontFamily="Segoe UI Semibold" FontSize="16" Foreground="{DynamicResource HeaderCaptionBrush}" Margin="5,2,0,2"/>
+				<TextBlock Text="Width (cm):" Grid.Row="2" FontFamily="Segoe UI Semilight" Foreground="{DynamicResource HeaderCaptionBrush}" FontSize="10.667" Margin="5,2,0,2"/>
+				<TextBox Grid.Row="3" Margin="5,2,10,5" Text="{Binding MonitorWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+				<TextBlock Text="Height (cm):" Grid.Row="4" FontFamily="Segoe UI Semilight" Foreground="{DynamicResource HeaderCaptionBrush}" FontSize="10.667" Margin="5,2,0,2"/>
+				<TextBox Grid.Row="5" Margin="5,2,10,5" Text="{Binding MonitorHeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+			</Grid>
+			<Grid Grid.Row="2" Grid.RowSpan="2">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="0.5*"/>
+					<ColumnDefinition Width="0.5*"/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="10"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition/>
+				</Grid.RowDefinitions>
+				<Rectangle Fill="{DynamicResource SectionHeaderBackgroundBrush}" Grid.ColumnSpan="2"/>
+				<TextBlock Text="Profile" FontFamily="Segoe UI Semibold" FontSize="16" Foreground="{DynamicResource HeaderCaptionBrush}" Margin="5,2,0,2" Grid.ColumnSpan="2"/>
+				<Button Content="Load" Grid.Row="2" Margin="5,2"/>
+				<Button Content="Save" Grid.Row="2" Margin="0,2,10,2" Grid.Column="1"/>
+				<Button Content="Import" Grid.Row="3" Margin="5,2" Command="{Binding ImportCommand}"/>
+                <Button Content="Export" Grid.Row="3" Margin="0,2,10,2" Grid.Column="1" Command="{Binding ExportCommand}"/>
+				<Button Content="Reset" Grid.Row="4" Grid.ColumnSpan="2" Margin="5,2,10,2"/>
+			</Grid>
+		</Grid>
+		<ScrollViewer Background="{DynamicResource DarkBackgroundBrush}" PanningMode="Both" HorizontalScrollBarVisibility="Visible" Grid.Column="1" Margin="5,5,0,5">
+            <Grid Height="{Binding ViewHeight, Converter={StaticResource CmToPxConverter}}" Width="{Binding ViewWidth, Converter={StaticResource CmToPxConverter}}">
+				<Grid.LayoutTransform>
+					<TransformGroup>
+						<ScaleTransform ScaleX="{Binding ViewZoom}" ScaleY="{Binding ViewZoom}"/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Grid.LayoutTransform>
+				<Border x:Name="border" Width="{Binding MonitorWidth, Converter={StaticResource CmToPxConverter}}" Height="{Binding MonitorHeight, Converter={StaticResource CmToPxConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="White" CornerRadius="5" BorderThickness="5" Background="{DynamicResource SectionHeaderBackgroundBrush}" />
+				<ItemsControl ItemsSource="{Binding EnabledLedGroupCollection}" Background="#A9631313" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+					<i:Interaction.Behaviors>
+						<Behaviors:DropBehavior DragDropManager="{Binding DataContext, ElementName=View}"/>
+					</i:Interaction.Behaviors>
+					<ItemsControl.ItemsPanel>
+						<ItemsPanelTemplate>
+							<Controls:DragCanvas AllowDragging="True"/>
+						</ItemsPanelTemplate>
+					</ItemsControl.ItemsPanel>
+					<ItemsControl.ItemContainerStyle>
+						<Style TargetType="{x:Type ContentPresenter}">
+							<Setter Property="Canvas.Left" Value="{Binding Location.X, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+							<Setter Property="Canvas.Top" Value="{Binding Location.Y, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+						</Style>
+					</ItemsControl.ItemContainerStyle>
+					<ItemsControl.ItemTemplate>
+						<DataTemplate>
+							<Controls:AdornedControl IsAdornerVisible="True" AdornerOffsetX="-5" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalAdornerPlacement="Outside" VerticalAdornerPlacement="Inside">
+								<Controls:AdornedControl.AdornerContent>
+									<Controls:LedGroupAdorner HorizontalAlignment="Left" VerticalAlignment="Top"/>
+								</Controls:AdornedControl.AdornerContent>
+								<Grid>
+									<Controls:LedGroup BorderBrush="White" Foreground="Black"/>
+								</Grid>
+							</Controls:AdornedControl>
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ItemsControl>
+			</Grid>
+		</ScrollViewer>
+		<GridSplitter Width="4" Background="{DynamicResource SectionHeaderBackgroundBrush}"/>
+		<GridSplitter HorizontalAlignment="Stretch" Height="5" VerticalAlignment="Top" Grid.Row="1" Grid.ColumnSpan="2" Background="{DynamicResource SectionHeaderBackgroundBrush}"/>
+		<Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="0,10,0,0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition/>
+			</Grid.RowDefinitions>
+			<Rectangle Fill="{DynamicResource SectionHeaderBackgroundBrush}"/>
+			<TextBlock HorizontalAlignment="Left" Text="Leds" VerticalAlignment="Top" FontFamily="Segoe UI Semibold" FontSize="16" Foreground="{DynamicResource HeaderCaptionBrush}" Margin="5,2"/>
+            <ItemsControl Grid.Row="1" Margin="5,2" ItemsSource="{Binding DisabledLedGroupCollection}" ItemsPanel="{DynamicResource DisabledLedGroupsItemsPanel}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="10">
+                            <Viewbox Stretch="Uniform">
+                                <Controls:LedGroup BorderBrush="White" Foreground="Black">
+                                    <i:Interaction.Behaviors>
+                                        <Behaviors:DragBehavior DragDropManager="{Binding DataContext, ElementName=View}"/>
+                                    </i:Interaction.Behaviors>
+                                </Controls:LedGroup>
+                            </Viewbox>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+		</Grid>
+	</Grid>
+
+</Window>
